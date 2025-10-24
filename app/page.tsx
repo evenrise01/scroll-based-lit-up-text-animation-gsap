@@ -1,65 +1,127 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import ReactLenis from "lenis/react";
+import type { LenisRef } from "lenis/react";
 
 export default function Home() {
+  const lenisRef = useRef<LenisRef | null>(null);
+
+  useEffect(() => {
+    function update(time: number) {
+      lenisRef.current?.lenis?.raf(time * 1000);
+    }
+    gsap.ticker.add(update);
+
+    return () => gsap.ticker.remove(update);
+  }, []);
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
+      <section className="hero">
+        <img src="/hero-img.jpg" alt="Intro Hero Image" />
+      </section>
+      <section className="about">
+        <div className="header">
+          <h1>A new chapter in modern design.</h1>
+        </div>
+        <div className="copy">
+          <p>
+            In an age where design defines perception, Evenrise Studios shapes
+            the intersection of clarity and creativity. Every detail is crafted
+            with intention, every experience built to elevate. This is more than
+            design—it is the quiet force behind progress, blending form and
+            function into visual harmony. At Evenrise, we don’t just build
+            brands; we help them rise, evenly and endlessly.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+      <section className="banner-img">
+        <img src="img-1.jpg" alt="banner" />
+      </section>
+      <section className="services">
+        <div className="service">
+          <div className="col">
+            <div className="service-copy">
+              <h3>Precision Design</h3>
+              <p>
+                Every breakthrough begins with intention. From the first sketch
+                to the final launch, our design process is grounded in balance,
+                clarity, and purpose. What you see isn’t just an interface—it’s
+                the result of countless deliberate choices, each crafted to
+                align beauty with function. Every pixel, every motion, is
+                designed to set new standards in digital elegance.
+              </p>
+            </div>
+          </div>
+          <div className="col">
+            <img src="/img-2.jpg" alt="" />
+          </div>
         </div>
-      </main>
-    </div>
+        <div className="service">
+          <div className="col">
+            <img src="/img-3.jpg" alt="" />
+          </div>
+          <div className="col">
+            <div className="service-copy">
+              <h3>Creative Direction</h3>
+              <p>
+                Every story begins with vision. At Evenrise, we translate
+                abstract ideas into clear creative direction—guiding form, tone,
+                and emotion with purpose. Our process finds beauty in restraint
+                and strength in simplicity, crafting narratives that resonate
+                across every medium. We don’t just shape visuals; we build
+                meaning that endures.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="service">
+          <div className="col">
+            <div className="service-copy">
+              <h3>Web Development</h3>
+              <p>
+                Design comes alive through motion and precision. From seamless
+                interactions to scalable architecture, our development process
+                ensures performance that feels effortless. Each line of code
+                reflects the same discipline as our design—minimal, refined, and
+                intentional. The result: experiences that move as smoothly as
+                they inspire.
+              </p>
+            </div>
+          </div>
+          <div className="col">
+            <img src="/img-4.jpg" alt="" />
+          </div>
+        </div>
+        <div className="service">
+          <div className="col">
+            <img src="/img-5.jpg" alt="" />
+          </div>
+          <div className="col">
+            <div className="service-copy">
+              <h3>Brand Identity</h3>
+              <p>
+                A brand is more than a logo—it’s a living language of clarity
+                and character. We craft identities that balance intuition with
+                intention, capturing what makes a brand timeless. From
+                typography to tone, every element works in harmony, creating a
+                presence that’s distinct, consistent, and quietly powerful.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="outro">
+        <h3>Elevate with Intention</h3>
+        <p>
+          At Evenrise Studios, design is not decoration—it’s direction. <br />Every
+          pixel has purpose, every motion a meaning. <br />We believe progress should
+          feel calm, not chaotic. <br />That clarity is the new luxury. <br />And that the
+          most powerful ideas don’t shout— they rise, evenly.
+        </p>
+      </section>
+    </>
   );
 }
